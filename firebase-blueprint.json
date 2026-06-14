@@ -1,0 +1,98 @@
+{
+  "entities": {
+    "BeverageItem": {
+      "title": "Beverage Item",
+      "description": "An inventory item",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "The ID of the user who owns this item"
+        },
+        "category": {
+          "type": "string",
+          "description": "Category of the beverage"
+        },
+        "customerName": {
+          "type": "string",
+          "description": "Optional customer name"
+        },
+        "customerPhone": {
+          "type": "string",
+          "description": "Optional customer phone"
+        },
+        "productName": {
+          "type": "string",
+          "description": "Name of the product"
+        },
+        "size": {
+          "type": "number",
+          "description": "Size in ML/L"
+        },
+        "unitPrice": {
+          "type": "number",
+          "description": "Unit price"
+        },
+        "quantityAvailable": {
+          "type": "number",
+          "description": "Current quantity"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Creation ISO date string"
+        },
+        "status": {
+          "type": "string",
+          "description": "Status inside the table"
+        }
+      },
+      "required": ["userId", "category", "productName", "size", "unitPrice", "quantityAvailable", "createdAt"]
+    },
+    "TransactionLog": {
+      "title": "Transaction Log",
+      "description": "Log of inventory changes",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "The ID of the user who owns this log"
+        },
+        "itemId": {
+          "type": "string",
+          "description": "ID of the affected item"
+        },
+        "productName": {
+          "type": "string",
+          "description": "Name of the product"
+        },
+        "action": {
+          "type": "string",
+          "description": "ADD or REMOVE"
+        },
+        "amountAdded": {
+          "type": "number",
+          "description": "Amount changed"
+        },
+        "totalQtyAfter": {
+          "type": "number",
+          "description": "Total quantity after change"
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "ISO date string of log"
+        }
+      },
+      "required": ["userId", "itemId", "productName", "action", "amountAdded", "totalQtyAfter", "timestamp"]
+    }
+  },
+  "firestore": {
+    "users/{userId}/inventory/{itemId}": {
+      "schema": "BeverageItem",
+      "description": "Inventory items for a specific user"
+    },
+    "users/{userId}/transactionLogs/{logId}": {
+      "schema": "TransactionLog",
+      "description": "Transaction logs for a specific user"
+    }
+  }
+}

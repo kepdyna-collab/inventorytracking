@@ -1,0 +1,16 @@
+{
+  "name": "Beverage Stock Tracker",
+  "short_name": "StockTracker",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFFDF5",
+  "theme_color": "#FEF9C3",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,224 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  /* Override problematic oklch colors with hex to support html2canvas */
+  --color-red-50: #fef2f2;
+  --color-red-100: #fee2e2;
+  --color-red-200: #fecaca;
+  --color-red-500: #ef4444;
+  --color-red-600: #dc2626;
+  --color-red-700: #b91c1c;
+  --color-blue-50: #eff6ff;
+  --color-blue-100: #dbeafe;
+  --color-blue-200: #bfdbfe;
+  --color-blue-500: #3b82f6;
+  --color-blue-600: #2563eb;
+  --color-blue-700: #1d4ed8;
+  --color-green-50: #f0fdf4;
+  --color-green-100: #dcfce7;
+  --color-green-200: #bbf7d0;
+  --color-green-400: #4ade80;
+  --color-green-500: #22c55e;
+  --color-green-600: #16a34a;
+  --color-green-700: #15803d;
+  --color-orange-50: #fff7ed;
+  --color-orange-100: #ffedd5;
+  --color-orange-200: #fed7aa;
+  --color-orange-400: #fb923c;
+  --color-orange-500: #f97316;
+  --color-orange-600: #ea580c;
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+  --color-yellow-100: #fef9c3;
+  --color-yellow-200: #fef08a;
+  --color-yellow-300: #fde047;
+  --color-yellow-400: #facc15;
+}
+
+@layer base {
+  @media print {
+    @page {
+      margin: 1cm;
+    }
+    body {
+      background: white !important;
+      color: black !important;
+      font-size: 12pt;
+    }
+    header, footer, nav, button {
+      display: none !important;
+    }
+    .print-only {
+      display: block !important;
+    }
+    * {
+      box-shadow: none !important;
+      text-shadow: none !important;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+  }
+}
+
+body {
+  @apply bg-[#F05C3E] text-white transition-colors duration-300;
+}
+
+/* Custom scrollbar for a cleaner look */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #E5E5E5;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #D1D1D1;
+}
+
+/* Export styles to ensure full capture */
+.is-exporting {
+  width: 1280px !important;
+  max-width: none !important;
+  overflow: visible !important;
+  height: auto !important;
+  background: inherit;
+}
+
+.is-exporting * {
+  overflow: visible !important;
+  max-height: none !important;
+  scrollbar-width: none !important;
+}
+
+.is-exporting .print\:hidden {
+  display: block !important;
+}
+
+.is-exporting-pdf {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+  color: #000000 !important;
+  position: relative !important;
+  z-index: 9999 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Force all children to be transparent so the root white background shows through */
+.is-exporting-pdf *,
+.is-exporting-pdf *::before,
+.is-exporting-pdf *::after {
+  background-color: transparent !important;
+  background: transparent !important;
+  background-image: none !important;
+  color: #000000 !important;
+  border-color: #000000 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transition: none !important;
+  animation: none !important;
+  -webkit-filter: none !important;
+  filter: none !important;
+  outline-color: #000000 !important;
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+}
+
+/* Ensure critical elements have a white background if needed (like table cells) */
+.is-exporting-pdf td,
+.is-exporting-pdf th,
+.is-exporting-pdf .bg-white,
+.is-exporting-pdf .table-cell {
+  background-color: #ffffff !important;
+}
+
+/* Hard override for any tailwind background classes */
+.is-exporting-pdf [class*="bg-"],
+.is-exporting-pdf [class*="from-"],
+.is-exporting-pdf [class*="to-"],
+.is-exporting-pdf [class*="via-"],
+.is-exporting-pdf [class*="dark:bg-"] {
+  background-color: transparent !important;
+  background: transparent !important;
+  background-image: none !important;
+}
+
+/* But specifically allow the root element to be white */
+.is-exporting-pdf[class*="bg-"],
+.is-exporting-pdf.bg-slate-950,
+.is-exporting-pdf.bg-slate-900,
+.is-exporting-pdf.bg-white,
+.is-exporting-pdf#root {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+}
+
+.is-exporting-pdf .border,
+.is-exporting-pdf .border-t,
+.is-exporting-pdf .border-b,
+.is-exporting-pdf .border-l,
+.is-exporting-pdf .border-r,
+.is-exporting-pdf [class*="border-"],
+.is-exporting-pdf table,
+.is-exporting-pdf tr,
+.is-exporting-pdf td,
+.is-exporting-pdf th {
+  border-color: #000000 !important;
+  border-width: 1px !important;
+  border-style: solid !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+
+.is-exporting-pdf table {
+  border-collapse: collapse !important;
+}
+
+/* Ensure icons are black */
+.is-exporting-pdf svg {
+  stroke: #000000 !important;
+  color: #000000 !important;
+}
+
+.is-exporting-pdf svg path,
+.is-exporting-pdf svg circle,
+.is-exporting-pdf svg rect,
+.is-exporting-pdf svg polyline,
+.is-exporting-pdf svg line {
+  stroke: #000000 !important;
+}
+
+.is-exporting-pdf svg[fill]:not([fill="none"]),
+.is-exporting-pdf svg [fill]:not([fill="none"]) {
+  fill: #000000 !important;
+}
+
+.is-exporting *::-webkit-scrollbar {
+  display: none !important;
+}
