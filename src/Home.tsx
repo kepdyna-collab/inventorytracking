@@ -316,7 +316,7 @@ export default function Home() {
                   </div>
                 ) : (
                   <>
-                    <div className="absolute right-1 top-1 flex items-center justify-end z-10 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="absolute right-1 top-1 flex items-center justify-end z-10">
                       <button 
                         onClick={(e) => togglePin(e, note.id)} 
                         className={`p-1 rounded hover:bg-white/20 transition-colors ${note.pinned ? 'text-white !opacity-100' : 'text-white/60 hover:text-white/90'}`}
@@ -333,7 +333,7 @@ export default function Home() {
                     
                     <button 
                       onClick={(e) => deleteNote(e, note.id)} 
-                      className="absolute right-1 bottom-1 p-1 rounded hover:bg-white/20 transition-colors text-white/90 z-10 opacity-0 group-hover:opacity-100"
+                      className="absolute right-1 bottom-1 p-1 rounded hover:bg-white/20 transition-colors text-white/90 z-10"
                     >
                       <Trash2 size={12} />
                     </button>

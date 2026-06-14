@@ -1,16 +1,16 @@
 {
-  "name": "Beverage Stock Tracker",
-  "short_name": "StockTracker",
+  "name": "Counter Inventory",
+  "short_name": "CounterInv",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#FFFDF5",
-  "theme_color": "#FEF9C3",
+  "background_color": "#020617",
+  "theme_color": "#1e293b",
   "icons": [
     {
-      "src": "/icon.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "src": "/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
     }
   ]
 }

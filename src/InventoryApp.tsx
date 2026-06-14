@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useRef, useEffect } from 'react';
-import { Plus, Search, Trash2, Edit2, Save, X, Filter, ArrowUpDown, Download, FileImage, FileText, Clock, Home, Shield } from 'lucide-react';
+import { Plus, Search, Trash2, Edit2, Save, X, Filter, ArrowUpDown, Download, FileImage, FileText, Clock, Home, Shield, Facebook } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { domToPng } from 'modern-screenshot';
 import jsPDF from 'jspdf';
@@ -9,6 +9,7 @@ interface BeverageItem {
   category: string;
   customerName?: string;
   customerPhone?: string;
+  salesDate?: string;
   productName: string;
   size: number;
   unitPrice: number;
@@ -200,6 +201,7 @@ export default function App() {
       category: '',
       customerName: '',
       customerPhone: '',
+      salesDate: new Date().toISOString().split('T')[0],
       productName: '',
       size: 0,
       unitPrice: 0,
@@ -371,6 +373,7 @@ export default function App() {
       category: '',
       customerName: '',
       customerPhone: '',
+      salesDate: new Date().toISOString().split('T')[0],
       productName: '',
       size: 0,
       unitPrice: 0,
@@ -576,6 +579,14 @@ export default function App() {
             <Home size={16} />
             Back to Home
           </button>
+          
+          <button 
+            className="flex items-center justify-center border-2 border-white/20 rounded-lg text-white hover:bg-white/10 transition-all bg-transparent shadow-sm w-[46px] h-[46px]"
+            onClick={() => window.open('https://facebook.com', '_blank')}
+            title="Facebook"
+          >
+            <Facebook size={20} className="fill-current" />
+          </button>
 
           {user && (
             <div className="flex items-center gap-2 bg-transparent text-white border-2 border-white/20 rounded-lg h-[46px] px-2 shadow-sm relative">
@@ -770,6 +781,7 @@ export default function App() {
               <tr className="bg-white/20 border-b border-white/20">
                 {systemTitle.toLowerCase().includes('sales inventory') && (
                   <>
+                    <th className="px-4 py-3 text-left font-black text-white uppercase text-[11px] tracking-wider border-r border-white/20">Date</th>
                     <th className="px-4 py-3 text-left font-black text-white uppercase text-[11px] tracking-wider border-r border-white/20">Name</th>
                     <th className="px-4 py-3 text-left font-black text-white uppercase text-[11px] tracking-wider border-r border-white/20">Phone</th>
                   </>
@@ -799,6 +811,14 @@ export default function App() {
                 <tr className="bg-white/10 animate-pulse">
                   {systemTitle.toLowerCase().includes('sales inventory') && (
                     <>
+                      <td className="p-2 border border-white/20">
+                        <input 
+                          type="date" 
+                          value={editForm.salesDate || ''} 
+                          onChange={e => setEditForm({...editForm, salesDate: e.target.value})}
+                          className="w-[110px] p-1 border rounded bg-transparent text-white dark:text-white text-xs font-bold"
+                        />
+                      </td>
                       <td className="p-2 border border-white/20">
                         <input 
                           type="text" 
@@ -911,6 +931,14 @@ export default function App() {
                         <tr key={item.id} className="bg-blue-50 dark:bg-blue-900/20 border-b border-white/20">
                           {systemTitle.toLowerCase().includes('sales inventory') && (
                             <>
+                              <td className="p-2 border-r border-white/20">
+                                <input 
+                                  type="date" 
+                                  value={editForm.salesDate || ''} 
+                                  onChange={e => setEditForm({...editForm, salesDate: e.target.value})}
+                                  className="w-[110px] p-1 border rounded bg-transparent text-white dark:text-white text-xs font-bold"
+                                />
+                              </td>
                               <td className="p-2 border-r border-white/20">
                                 <input 
                                   type="text" 
@@ -1029,6 +1057,13 @@ export default function App() {
                       >
                         {systemTitle.toLowerCase().includes('sales inventory') && (
                           <>
+                            <td className={`px-4 py-3 font-medium border-r border-white/20 transition-colors ${
+                              selectedRowId === item.id 
+                                ? 'bg-red-100/50 dark:bg-red-900/40 text-black' 
+                                : 'bg-transparent text-white text-white'
+                            }`}>
+                              {item.salesDate ? new Date(item.salesDate).toLocaleDateString() : ''}
+                            </td>
                             <td className={`px-4 py-3 font-medium border-r border-white/20 transition-colors ${
                               selectedRowId === item.id 
                                 ? 'bg-red-100/50 dark:bg-red-900/40 text-black' 
